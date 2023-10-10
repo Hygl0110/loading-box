@@ -5,7 +5,7 @@ const options = [
   },
   {
     name: "load",
-    options: ["VA", "hp", "cv"],
+    options: ["VA", "hp", "CV"],
   },
   {
     name: "voltage",

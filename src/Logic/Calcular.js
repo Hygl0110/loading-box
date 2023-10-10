@@ -13,32 +13,6 @@ function raiz(numero) {
   return Math.sqrt(numero);
 }
 
-//Calcular corriente
-export function calcCurrent(voltage, load, phases) {
-  let current = 0;
-  if (phases === 1) {
-    current = (load * raiz(3)) / voltage;
-  } else if (phases === 2) {
-    current = load / voltage;
-  } else if (phases === 3) {
-    current = load / (voltage * raiz(3));
-  }
-  return current;
-}
-
-//Calcular potencia
-export function calcLoad(voltage, current, phases) {
-  let load = 0;
-  if (phases === 1) {
-    load = (current * voltage) / raiz(3);
-  } else if (phases === 2) {
-    load = current * voltage;
-  } else if (phases === 3) {
-    load = current * voltage * raiz(3);
-  }
-  return load;
-}
-
 //Ubicar datos numericos en tablas
 function numTableLocate(table, valueIn, columIn, columOut) {
   let valueOut = 0;
@@ -56,7 +30,7 @@ function numTableLocate(table, valueIn, columIn, columOut) {
   return [valueOut, index];
 }
 
-//Ubicar con texto en tablas
+//Ubicar valores con texto en tablas
 function textTableLocate(table, valueIn, columIn, columOut) {
   let valueOut = "";
   let index = 0;
@@ -73,9 +47,20 @@ function textTableLocate(table, valueIn, columIn, columOut) {
   return [valueOut, index];
 }
 
-//calibre del conductor a tierra
-export function ground(current) {
-  return numTableLocate(T250_95, current, "corriente", "Cu");
+//Calcular la potencia y la corriente
+export function calcLoad_Current(voltage, loadIn, phases, loadType) {
+  const loadtypes = { VA: 1, hp: 745.699872, CV: 735.49875 };
+  const load = loadIn * loadtypes.loadType;
+  let current = 0;
+
+  if (phases === 1) {
+    current = (load * raiz(3)) / voltage;
+  } else if (phases === 2) {
+    current = load / voltage;
+  } else if (phases === 3) {
+    current = load / (voltage * raiz(3));
+  }
+  return [load, current];
 }
 
 //Calibre y Caida de tension adecuadas a la normta CT < 3%
@@ -96,9 +81,6 @@ export function AWG_CT(phases, current, voltage, DT) {
     else if (phases === 3) {
       caida = ((raiz(3) * DT * RC * current) / (1000 * voltage)) * 100;
     } //Validar si la caida es menos al 3%, si es asi subimos el calibre en una unidad y se vuelve a calcula
-    console.log(calibre);
-    console.log(RC);
-    console.log(caida);
     if (caida > 3) {
       rowIndex += 1;
       RC = T8.data[rowIndex][T8.columns.indexOf("Cu")];
@@ -107,6 +89,11 @@ export function AWG_CT(phases, current, voltage, DT) {
   }
 
   return [calibre, caida.toFixed(2)];
+}
+
+//calibre del conductor a tierra
+export function ground(current) {
+  return numTableLocate(T250_95, current, "corriente", "Cu");
 }
 
 //seleccion de PTM
