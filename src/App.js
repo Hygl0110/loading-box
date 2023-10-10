@@ -1,6 +1,5 @@
 import "./App.css";
-import React from "react";
-import LoadsBox from "./Pages/LoadsBox/LoadsBox";
+import LoadsBox from "./Components/Pages/LoadsBox/LoadsBox";
 
 export default function App() {
   return (

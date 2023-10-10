@@ -6,9 +6,9 @@ import Select from "../../Atoms/Select/Select";
 
 export default function LoadForm(props) {
   return (
-    <form className="loadForm">
+    <div className="loadForm">
       <Number />
       <Select options={props.loadOptions} />
-    </form>
+    </div>
   );
 }
