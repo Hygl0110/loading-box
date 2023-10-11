@@ -5,8 +5,7 @@ export default function Number(props) {
     <input
       type="number"
       step={"0.01"}
-      max={props.max}
-      min={props.min}
+      onChange={props.onChange}
       required
     ></input>
   );

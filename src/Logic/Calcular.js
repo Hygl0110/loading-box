@@ -47,26 +47,38 @@ function textTableLocate(table, valueIn, columIn, columOut) {
   return [valueOut, index];
 }
 
-//Calcular la potencia y la corriente
-export function calcLoad_Current(voltage, loadIn, phases, loadType) {
-  const loadtypes = { VA: 1, hp: 745.699872, CV: 735.49875 };
-  const load = loadIn * loadtypes.loadType;
-  let current = 0;
+//calcular potencia, corriente, calibre y caida de tension adecuadas a la normta CT < 3%
+export function calcRowTable(desc, loadIn, loadType, LF, phases, voltage, DT) {
+  //Carga
+  const loadTypes = { VA: 1, hp: 745.699872, CV: 735.49875 };
+  const load = (loadIn * loadTypes[loadType]) / LF;
 
+  //Corriente
+  let current = 0;
+  //Monofasico
   if (phases === 1) {
     current = (load * raiz(3)) / voltage;
-  } else if (phases === 2) {
+  } //Bifasico
+  else if (phases === 2) {
     current = load / voltage;
-  } else if (phases === 3) {
+  } //Trifasico
+  else if (phases === 3) {
     current = load / (voltage * raiz(3));
   }
-  return [load, current];
-}
 
-//Calibre y Caida de tension adecuadas a la normta CT < 3%
-export function AWG_CT(phases, current, voltage, DT) {
-  let [calibre] = numTableLocate(T310_16, current, "Cu60", "calibre");
-  let [RC, rowIndex] = textTableLocate(T8, calibre, "calibre", "Cu");
+  //PTM
+  let PTM = 15;
+  const { data } = TPTM;
+  for (const iterator of data) {
+    if (iterator >= current) {
+      [PTM] = iterator;
+      break;
+    }
+  }
+
+  //Calibre de fase y CT...
+  let [calibrePhase] = numTableLocate(T310_16, current, "Cu60", "calibre");
+  let [RC, rowIndex] = textTableLocate(T8, calibrePhase, "calibre", "Cu");
   let caida = 100;
 
   //#ciclo, calculo CT, aumenta un valor del indice hasta que CT < 3%
@@ -81,39 +93,41 @@ export function AWG_CT(phases, current, voltage, DT) {
     else if (phases === 3) {
       caida = ((raiz(3) * DT * RC * current) / (1000 * voltage)) * 100;
     } //Validar si la caida es menos al 3%, si es asi subimos el calibre en una unidad y se vuelve a calcula
-    if (caida > 3) {
-      rowIndex += 1;
-      RC = T8.data[rowIndex][T8.columns.indexOf("Cu")];
-      calibre = T310_16.data[rowIndex][T310_16.columns.indexOf("calibre")];
-    }
+    //Aumentar el indice para caluclar CT con los sigueintes valores de la tabla
+    rowIndex += 1;
+    RC = T8.data[rowIndex][T8.columns.indexOf("Cu")];
+    calibrePhase = T310_16.data[rowIndex][T310_16.columns.indexOf("calibre")];
   }
 
-  return [calibre, caida.toFixed(2)];
-}
+  //Calibre Neutro
+  const calibreN = calibrePhase;
 
-//calibre del conductor a tierra
-export function ground(current) {
-  return numTableLocate(T250_95, current, "corriente", "Cu");
-}
+  //Calibre Tierra
+  const [calibreGround] = numTableLocate(T250_95, current, "corriente", "Cu");
 
-//seleccion de PTM
-export function PTM(corriente) {
-  let PTM = 15;
-  const { data } = TPTM;
-  for (const iterator of data) {
-    if (iterator >= corriente) {
-      PTM = iterator;
-      break;
-    }
-  }
-  return PTM;
-}
+  //Area para calculo de canalizaciones
+  const [area] = textTableLocate(T5, calibrePhase, "calibre", "mm2");
+  const areaTotal = area * (phases + 2);
+  //PVCA
+  const [PVCA] = numTableLocate(T4_PVCA, areaTotal, "masDe2", "ich");
 
-//Diametro de acometida en PVC tipo A y EMT
-export function PVCA_EMT(calibre, fhases) {
-  const area = textTableLocate(T5, calibre, "calibre", "mm2") * (fhases + 2);
+  //EMT
+  const [EMT] = numTableLocate(T4_EMT, areaTotal, "masDe2", "ich");
+
+  //Array con los datos calculados
   return [
-    numTableLocate(T4_PVCA, area, "masDe2", "ich"),
-    numTableLocate(T4_EMT, area, "masDe2", "ich"),
+    desc,
+    load.toFixed(2),
+    voltage,
+    current.toFixed(2),
+    PTM,
+    phases,
+    DT,
+    calibrePhase,
+    calibreN,
+    calibreGround,
+    caida.toFixed(2),
+    PVCA,
+    EMT,
   ];
 }

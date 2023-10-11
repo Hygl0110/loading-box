@@ -1,3 +1,4 @@
+import "./Table.css";
 import React from "react";
 
 export default function Table(props) {
@@ -5,7 +6,7 @@ export default function Table(props) {
   const tr = props.rows;
 
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           {th.map((th, index) => (

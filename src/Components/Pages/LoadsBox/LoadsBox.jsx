@@ -1,14 +1,17 @@
 import "./LoadsBox.css";
-import React from "react";
+import React, { useState } from "react";
 
 import options from "../../../Arrays/options"; //array de opciones
+import { init, results } from "../../../Arrays/arrays"; //Array initial state & results array
 
-import Forms from "../../Organisms/Form/Forms";
-import { T310_16 } from "../../../Arrays/NTC2050Tables";
+import Forms from "../../Organisms/Form/Forms"; //Organism Froms
 import Table from "../../Molecules/Table/Table";
 
 export default function LoadsBox() {
-  const [circuits, loads, voltages, phases] = options;
+  const [circuit, setCircuit] = useState(init); //Estado inicial que contiene un objeto con propiedades
+  const [circuits, loads, voltages, phases] = options; //opciones para los Componestes Select
+  let { columns, data } = results; //Para presentar los datos en la tabla de resultados
+
   return (
     <div className="loadsBox">
       <>
@@ -26,14 +29,10 @@ export default function LoadsBox() {
               loadOptions={loads}
               voltageOptions={voltages}
               phaseOptions={phases}
-              minLoad={0.01}
-              maxLoad={99999}
-              minDT={0.01}
-              maxDT={1}
             />
           </>
           <>
-            <Table heads={T310_16.columns} rows={T310_16.data} />
+            <Table heads={columns} rows={data} />
           </>
         </main>
       </>
