@@ -1,7 +1,12 @@
 const options = [
   {
     name: "circuit",
-    options: ["Alumbrado general", "Pequeños artefactos", "Lavado y planchado"],
+    options: [
+      "Alumbrado general",
+      "Pequeños artefactos",
+      "Lavado y planchado",
+      "Duchas",
+    ],
   },
   {
     name: "load",

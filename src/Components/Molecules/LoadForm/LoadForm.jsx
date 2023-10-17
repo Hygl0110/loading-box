@@ -7,10 +7,24 @@ import Select from "../../Atoms/Select/Select";
 export default function LoadForm(props) {
   return (
     <div className="loadForm">
-      <Number value={props.valueLoad} onChange={props.onChangeLoad} />
-      <Select options={props.loadOptions} />
-      {props.fp ? (
-        <Number value={props.valueFp} onChange={props.onChangeFp} />
+      <Number
+        onChange={props.onChangeLoad}
+        placeholder="Ingresar Carga"
+        min={1}
+        max={30000}
+      />
+      <Select
+        onChange={props.onChangeLoadType}
+        options={props.loadTypeOptions}
+      />
+      {props.factor ? <label>fp:</label> : null}
+      {props.factor ? (
+        <Number
+          onChange={props.onChangeFp}
+          placeholder="Ingresar fp"
+          min={0.01}
+          max={1}
+        />
       ) : null}
     </div>
   );
