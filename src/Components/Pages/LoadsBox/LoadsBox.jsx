@@ -1,5 +1,5 @@
 import "./LoadsBox.css";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import options from "../../../Arrays/options"; //array de opciones
 import { columns, formInit, init } from "../../../Arrays/arrays"; //Array initial state & results array
@@ -12,17 +12,27 @@ import { calcRowTable } from "../../../Logic/Calcular"; //Logica
 export default function LoadsBox() {
   const [circuits, loadTypes, voltages, phases] = options; //opciones para los Componestes Select
 
-  const [circuit, setCircuit] = useState(init); //Estado inicial que contiene un objeto con propiedades
+  const [circuit, setCircuit] = useState(init); //Estado inicial para los resultado de la tabla
 
   const [form, setForm] = useState(formInit); //Estado para el formulario
 
   console.log(form);
-  //Eventos - Formulario
-
   //onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit");
+    const newRow = calcRowTable(
+      form.circuit,
+      form.load,
+      form.loadType,
+      form.fp,
+      form.phases,
+      form.voltage,
+      form.DT
+    );
+    let updatedResults = [...circuit.results, newRow];
+    let updatedCircuit = { ...circuit, results: updatedResults };
+    setCircuit(updatedCircuit);
   };
 
   //Circuito
@@ -35,7 +45,7 @@ export default function LoadsBox() {
   //Carga
   const handleLoadChange = (e) => {
     let newLoad = e.target.value;
-    if (newLoad <= 0) {
+    if (newLoad <= 0 || newLoad > 100000) {
       newLoad = 1;
     }
     let updatedForm = { ...form, load: newLoad };
@@ -82,36 +92,22 @@ export default function LoadsBox() {
   //DT
   const handleDTChange = (e) => {
     let newDT = e.target.value;
-    if (newDT === 0) {
+    if (newDT < 0 || newDT > 400) {
       newDT = 1;
     }
     let updatedForm = { ...form, DT: newDT };
     setForm(updatedForm);
   };
 
-  console.log(
-    calcRowTable(
-      form.circuit,
-      form.load,
-      form.loadType,
-      form.fp,
-      form.phases,
-      form.voltage,
-      form.DT
-    )
-  );
-
   return (
     <div className="loadsBox">
       <>
         <header className="header">
-          <label>header: </label>
-          <h1>Loading Box</h1>
+          <h2>Loading Box</h2>
         </header>
       </>
       <>
         <main className="main">
-          <p>main:</p>
           <>
             <Forms
               /*Submit*/
@@ -134,13 +130,32 @@ export default function LoadsBox() {
             />
           </>
           <>
-            <Table heads={columns} rows={circuit.results} />
+            <Table
+              heads={columns}
+              rows={circuit.results}
+              tittle="Cuadro de cargas"
+            />
           </>
         </main>
       </>
       <>
         <footer className="footer">
-          <label>footer: </label>
+          <p>
+            Conductores Fase y Neutro: T316-16 NTC 2050 - diseño a 60° para
+            conductores canalizados
+          </p>
+          <p>Condutor Tierra : T250-95 NTC 2050 - conductor puesta a tierra</p>
+          <p>conduit PVC tipo A y conduit EMT: T4 NTC 2050 </p>
+          <br />
+          <p>
+            <a
+              href="https://www.minenergia.gov.co/documents/3809/Anexo_General_del_RETIE_vigente_actualizado_a_2015-1.pdf"
+              target="_blanck"
+            >
+              Anexo General del RETIE 2013
+            </a>
+          </p>
+          <br />
           <p>by: Daniel Cardona</p>
         </footer>
       </>

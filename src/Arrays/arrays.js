@@ -27,4 +27,5 @@ export const formInit = {
   voltage: 208,
   phases: 1,
   DT: 1,
+  maxLoad: 1,
 };

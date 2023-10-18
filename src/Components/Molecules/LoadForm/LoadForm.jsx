@@ -17,11 +17,11 @@ export default function LoadForm(props) {
         onChange={props.onChangeLoadType}
         options={props.loadTypeOptions}
       />
-      {props.factor ? <label>fp:</label> : null}
+      {props.factor ? <label> fp: </label> : null}
       {props.factor ? (
         <Number
           onChange={props.onChangeFp}
-          placeholder="Ingresar fp"
+          placeholder="fp"
           min={0.01}
           max={1}
         />

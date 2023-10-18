@@ -6,6 +6,7 @@ const options = [
       "Pequeños artefactos",
       "Lavado y planchado",
       "Duchas",
+      "Bomba",
     ],
   },
   {

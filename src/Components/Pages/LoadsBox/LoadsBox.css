@@ -1,29 +1,41 @@
-.loadsBox{
-    margin:0 auto;
-    display: flex;
-    flex-direction: column;
-    padding: 12px 24px;
-    background-color: darkslateblue;
-    border: 3px solid snow;
-    border-radius: 12px;
-
+.loadsBox {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10 rgba(0, 0, 0, 0.1);
 }
+
 .header {
-    padding: 12px;
-    border: 1px solid snow;
-    border-radius: 10px;
-    margin: 6px 0;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
 
+/* Estilo para el título dentro del encabezado */
+.header h2 {
+  font-size: 24px;
+  margin: 0;
 }
-.main{
-    padding: 12px;
-    border: 1px solid snow;
-    border-radius: 10px;
-    margin: 6px 0;
+/* Estilo para el footer */
+.footer {
+  margin-top: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
 }
-.footer{
-    padding: 12px;
-    border: 1px solid snow;
-    border-radius: 10px;
-    margin: 6px 0;
+
+/* Estilo para el párrafo dentro del footer */
+.footer p {
+  margin: 0;
+}
+a {
+  color: #fff;
+}
+/* Estilo para el contenedor principal (main) */
+main {
+  padding: 20px;
 }

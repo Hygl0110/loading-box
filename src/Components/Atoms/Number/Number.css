@@ -1,5 +1,6 @@
-.number{
-    max-width: 200px;
-    min-width: 200px;
-    padding: 2px 4px;
+.number {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

@@ -1,7 +1,50 @@
-table{
-    padding: 12px;
-    border: 1px solid snow;
-    border-radius: 10px;
-    margin: 6px 0;
-    text-align: center;
+/* Estilo para el contenedor de la tabla */
+.table {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Agregamos scroll horizontal en pantallas pequeñas */
+}
+
+/* Estilo para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilo para la cabecera de la tabla */
+table caption {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para las celdas de encabezado de la tabla */
+table thead th {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Estilo para las celdas de datos de la tabla */
+table tbody th {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo para filas impares de la tabla */
+table tbody tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+/* Estilo para filas pares de la tabla */
+table tbody tr:nth-child(even) {
+  background-color: #fff;
 }
