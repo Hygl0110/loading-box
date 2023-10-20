@@ -9,7 +9,7 @@ export default function LoadForm(props) {
     <div className="loadForm">
       <Number
         onChange={props.onChangeLoad}
-        placeholder="Ingresar Carga"
+        placeholder="Carga"
         min={1}
         max={30000}
       />

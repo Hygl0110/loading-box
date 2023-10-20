@@ -1,6 +1,5 @@
-.submit {
-  width: 100%;
-  margin: 0 auto;
+button {
+  display: block;
   background-color: #007bff;
   color: #fff;
   padding: 10px 15px;
@@ -9,6 +8,6 @@
   cursor: pointer;
 }
 
-.submit:hover {
+button:hover {
   background-color: #0056b3;
 }

@@ -11,7 +11,7 @@ const options = [
   },
   {
     name: "load",
-    options: ["VA", "hp", "CV"],
+    options: ["VA", "W", "hp", "CV"],
   },
   {
     name: "voltage",

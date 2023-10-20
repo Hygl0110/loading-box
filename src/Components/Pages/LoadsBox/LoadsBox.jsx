@@ -20,19 +20,25 @@ export default function LoadsBox() {
   //onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    const newRow = calcRowTable(
-      form.circuit,
-      form.load,
-      form.loadType,
-      form.fp,
-      form.phases,
-      form.voltage,
-      form.DT
-    );
-    let updatedResults = [...circuit.results, newRow];
-    let updatedCircuit = { ...circuit, results: updatedResults };
-    setCircuit(updatedCircuit);
+    try {
+      console.log("submit");
+      const newRow = calcRowTable(
+        form.circuit,
+        form.load,
+        form.loadType,
+        form.fp,
+        form.phases,
+        form.voltage,
+        form.DT
+      );
+      let updatedResults = [...circuit.results, newRow];
+      let updatedCircuit = { ...circuit, results: updatedResults };
+      setCircuit(updatedCircuit);
+    } catch (error) {
+      alert(
+        "La corriente del circuito ingresado supera los 560A, no se encuntran datos en la tabla 310-16 para 60°"
+      );
+    }
   };
 
   //Circuito
