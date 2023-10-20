@@ -48,3 +48,17 @@ table tbody tr:nth-child(odd) {
 table tbody tr:nth-child(even) {
   background-color: #fff;
 }
+
+@media (max-width: 768px) {
+  /* Estilos para la tabla en resoluciones pequeñas */
+  .table {
+    width: 100%; /* Utiliza el ancho completo del contenedor */
+    display: block; /* Cambia a un diseño de bloque para que sea completamente responsivo */
+  }
+
+  /* Ajusta los estilos de las celdas de datos para resoluciones pequeñas */
+  table tbody th {
+    padding: 5px; /* Reduce el relleno en celdas de datos */
+    font-size: 12px; /* Reduce el tamaño de fuente */
+  }
+}
