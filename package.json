@@ -1,7 +1,7 @@
 {
   "homepage": "http://hygl0110.github.io/loading-box",
   "name": "loading-box",
-  "version": "0.1.1",
+  "version": "0.1.12",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
