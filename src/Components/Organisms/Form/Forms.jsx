@@ -44,7 +44,6 @@ export default function Forms(props) {
             onChange={props.onChangeDT}
             placeholder="Ingresar DT"
             min={0.01}
-            max={400}
           />
         </>
         <>

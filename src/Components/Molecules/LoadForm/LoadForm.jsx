@@ -7,12 +7,7 @@ import Select from "../../Atoms/Select/Select";
 export default function LoadForm(props) {
   return (
     <div className="loadForm">
-      <Number
-        onChange={props.onChangeLoad}
-        placeholder="Carga"
-        min={1}
-        max={30000}
-      />
+      <Number onChange={props.onChangeLoad} placeholder="Carga" min={1} />
       <Select
         onChange={props.onChangeLoadType}
         options={props.loadTypeOptions}

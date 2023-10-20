@@ -51,7 +51,7 @@ export default function LoadsBox() {
   //Carga
   const handleLoadChange = (e) => {
     let newLoad = e.target.value;
-    if (newLoad <= 0 || newLoad > 100000) {
+    if (newLoad <= 0) {
       newLoad = 1;
     }
     let updatedForm = { ...form, load: newLoad };
@@ -98,7 +98,7 @@ export default function LoadsBox() {
   //DT
   const handleDTChange = (e) => {
     let newDT = e.target.value;
-    if (newDT < 0 || newDT > 400) {
+    if (newDT < 0) {
       newDT = 1;
     }
     let updatedForm = { ...form, DT: newDT };
