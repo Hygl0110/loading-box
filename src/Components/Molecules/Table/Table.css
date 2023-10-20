@@ -1,6 +1,5 @@
 /* Estilo para el contenedor de la tabla */
 .table {
-  margin: 0 auto;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
@@ -51,10 +50,6 @@ table tbody tr:nth-child(even) {
 
 @media (max-width: 768px) {
   /* Estilos para la tabla en resoluciones pequeñas */
-  .table {
-    width: 100%; /* Utiliza el ancho completo del contenedor */
-    display: block; /* Cambia a un diseño de bloque para que sea completamente responsivo */
-  }
 
   /* Ajusta los estilos de las celdas de datos para resoluciones pequeñas */
   table tbody th {

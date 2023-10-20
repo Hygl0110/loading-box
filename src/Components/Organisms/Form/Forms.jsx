@@ -15,20 +15,28 @@ export default function Forms(props) {
         <>
           <label>Circuit:</label>
           <Select
+            title="Circuito"
             onChange={props.onChangeCircuit}
             options={props.circuitOptions}
           />
         </>
         <>
           <label>Load:</label>
-          <Number onChange={props.onChangeLoad} placeholder="Carga" min={1} />
+          <Number
+            title="Carga"
+            onChange={props.onChangeLoad}
+            placeholder="Carga"
+            min={1}
+          />
           <Select
+            title="Tipo de arga"
             onChange={props.onChangeLoadType}
             options={props.loadTypeOptions}
           />
           {props.factor ? <label> fp: </label> : null}
           {props.factor ? (
             <Number
+              title="Factor de potencia"
               onChange={props.onChangeFp}
               placeholder="fp"
               min={0.01}
@@ -39,13 +47,15 @@ export default function Forms(props) {
         <>
           <label>Voltage:</label>
           <Select
+            title="Voltaje"
             onChange={props.onChangeVoltage}
             options={props.voltageOptions}
           />
         </>
         <>
-          <label>phases:</label>
+          <label>Phases:</label>
           <Select
+            title="Numero de fases"
             onChange={props.onChangePhases}
             options={props.phaseOptions}
           />
@@ -53,13 +63,14 @@ export default function Forms(props) {
         <>
           <label>DT:</label>
           <Number
+            title="Distancia al tablero"
             onChange={props.onChangeDT}
             placeholder="Ingresar DT"
             min={0.01}
           />
         </>
         <>
-          <Submit value={"Add Row"} />
+          <Submit title="Agregar" value={"Add Row"} />
         </>
       </form>
     </div>

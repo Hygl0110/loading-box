@@ -1,25 +1,29 @@
 .loadsBox {
-  width: 100%;
+  margin: 0 auto;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 0 10 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .header {
+  margin-bottom: 20px;
   background-color: #007bff;
   color: #fff;
   padding: 10px;
   text-align: center;
 }
 
-/* Estilo para el título dentro del encabezado */
 .header h2 {
   font-size: 24px;
   margin: 0;
 }
-/* Estilo para el footer */
+
+main {
+  justify-content: space-evenly;
+}
+
 .footer {
   margin-top: 20px;
   background-color: #333;
@@ -28,47 +32,33 @@
   text-align: center;
 }
 
-/* Estilo para el párrafo dentro del footer */
 .footer p {
   margin: 0;
 }
+
 a {
   color: #fff;
 }
-/* Estilo para el contenedor principal (main) */
-main {
-  padding: 20px;
-}
 
+/* Estilos para resoluciones grandes (ejemplo: 1024px o superior) */
 @media (min-width: 1024px) {
-  /* Ajusta el ancho del contenedor principal */
   .loadsBox {
-    width: 90%; /* Puedes ajustar el ancho según tus preferencias */
+    width: 95%; /* Ajusta el ancho según tus preferencias */
   }
 
-  /* Estilos para el encabezado (header) en resoluciones grandes */
-  .header {
-    padding: 20px;
-    text-align: center;
-  }
-
-  /* Estilos para el título del encabezado en resoluciones grandes */
   .header h2 {
     font-size: 36px; /* Aumenta el tamaño de fuente */
   }
 
-  /* Estilos para el contenido principal (main) en resoluciones grandes */
   main {
-    display: flex; /* Distribuye los elementos a ambos lados */
+    display: flex;
+    align-items: flex-start; /* Alinear los elementos al principio del contenedor */
   }
 
-  /* Estilos para el formulario en resoluciones grandes */
   .form {
-    width: 60%; /* Asigna un ancho específico al formulario */
+    flex-grow: 1; /* Permite que el formulario ocupe el espacio restante */
   }
-
-  /* Estilos para la tabla en resoluciones grandes */
   .table {
-    width: 75%; /* Asigna un ancho específico a la tabla */
+    flex-grow: 1;
   }
 }
