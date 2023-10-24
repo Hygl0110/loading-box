@@ -1,7 +1,5 @@
-.form {
+.form_container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
@@ -9,9 +7,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos del formulario*/
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 /* Estilo para etiquetas de los campos */
 label {
-  display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }

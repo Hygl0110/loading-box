@@ -1,5 +1,5 @@
 .loadsBox {
-  margin: 0 auto;
+  flex-wrap: wrap;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
@@ -21,7 +21,20 @@
 }
 
 main {
-  justify-content: space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form_container {
+  flex-basis: 10rem;
+  flex-grow: 1;
+}
+
+.table_container {
+  flex-basis: 1rem;
+  flex-grow: 999;
+  min-width: 75%;
 }
 
 .footer {
@@ -32,33 +45,6 @@ main {
   text-align: center;
 }
 
-.footer p {
-  margin: 0;
-}
-
-a {
+.footer a {
   color: #fff;
-}
-
-/* Estilos para resoluciones grandes (ejemplo: 1024px o superior) */
-@media (min-width: 1024px) {
-  .loadsBox {
-    width: 95%; /* Ajusta el ancho según tus preferencias */
-  }
-
-  .header h2 {
-    font-size: 36px; /* Aumenta el tamaño de fuente */
-  }
-
-  main {
-    display: flex;
-    align-items: flex-start; /* Alinear los elementos al principio del contenedor */
-  }
-
-  .form {
-    flex-grow: 1; /* Permite que el formulario ocupe el espacio restante */
-  }
-  .table {
-    flex-grow: 1;
-  }
 }

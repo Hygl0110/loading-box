@@ -7,11 +7,12 @@ import { Submit } from "../../Atoms/Submit/Submit";
 
 export default function Forms(props) {
   return (
-    <div>
+    <div className="form_container">
       <form className="form" onSubmit={props.onSubmit}>
         <>
           <h3>Form:</h3>
         </>
+
         <>
           <label>Circuit:</label>
           <Select
@@ -20,6 +21,7 @@ export default function Forms(props) {
             options={props.circuitOptions}
           />
         </>
+
         <>
           <label>Load:</label>
           <Number
@@ -28,12 +30,16 @@ export default function Forms(props) {
             placeholder="Carga"
             min={1}
           />
+        </>
+
+        <>
+          <label>Load units:</label>
           <Select
             title="Tipo de arga"
             onChange={props.onChangeLoadType}
             options={props.loadTypeOptions}
           />
-          {props.factor ? <label> fp: </label> : null}
+          {props.factor ? <label> lf: </label> : null}
           {props.factor ? (
             <Number
               title="Factor de potencia"
@@ -44,6 +50,7 @@ export default function Forms(props) {
             />
           ) : null}
         </>
+
         <>
           <label>Voltage:</label>
           <Select
@@ -52,6 +59,7 @@ export default function Forms(props) {
             options={props.voltageOptions}
           />
         </>
+
         <>
           <label>Phases:</label>
           <Select
@@ -60,6 +68,7 @@ export default function Forms(props) {
             options={props.phaseOptions}
           />
         </>
+
         <>
           <label>DT:</label>
           <Number
@@ -69,6 +78,7 @@ export default function Forms(props) {
             min={0.01}
           />
         </>
+
         <>
           <Submit title="Agregar" value={"Add Row"} />
         </>

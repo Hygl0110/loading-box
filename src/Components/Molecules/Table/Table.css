@@ -1,5 +1,8 @@
 /* Estilo para el contenedor de la tabla */
-.table {
+.table_container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
@@ -10,7 +13,6 @@
 
 /* Estilo para la tabla */
 table {
-  width: 100%;
   border-collapse: collapse;
 }
 
@@ -29,13 +31,14 @@ table thead th {
   background-color: #007bff;
   color: #fff;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 /* Estilo para las celdas de datos de la tabla */
-table tbody th {
+table tbody td {
   padding: 10px;
   border: 1px solid #ccc;
+  text-align: center;
 }
 
 /* Estilo para filas impares de la tabla */
@@ -46,14 +49,4 @@ table tbody tr:nth-child(odd) {
 /* Estilo para filas pares de la tabla */
 table tbody tr:nth-child(even) {
   background-color: #fff;
-}
-
-@media (max-width: 768px) {
-  /* Estilos para la tabla en resoluciones pequeñas */
-
-  /* Ajusta los estilos de las celdas de datos para resoluciones pequeñas */
-  table tbody th {
-    padding: 5px; /* Reduce el relleno en celdas de datos */
-    font-size: 12px; /* Reduce el tamaño de fuente */
-  }
 }

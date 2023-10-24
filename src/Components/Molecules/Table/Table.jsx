@@ -6,8 +6,8 @@ export default function Table(props) {
   const tr = props.rows;
 
   return (
-    <div className="table">
-      <table>
+    <div className="table_container">
+      <table className="table">
         <caption>
           <h2>{props.tittle}</h2>
         </caption>
@@ -22,7 +22,7 @@ export default function Table(props) {
           {tr.map((tr, rIndex) => (
             <tr key={rIndex}>
               {tr.map((td, dIndex) => (
-                <th key={dIndex}>{td}</th>
+                <td key={dIndex}>{td}</td>
               ))}
             </tr>
           ))}
