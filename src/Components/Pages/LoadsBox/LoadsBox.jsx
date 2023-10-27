@@ -1,5 +1,8 @@
 import "./LoadsBox.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import Header from "../../Organisms/Header/Header"; //Organism Header
+import Footer from "../../Organisms/Footer/Footer"; //Organism Footer
 
 import options from "../../../Arrays/options"; //array de opciones
 import { columns, formInit, init } from "../../../Arrays/arrays"; //Array initial state & results array
@@ -10,15 +13,15 @@ import Table from "../../Molecules/Table/Table"; //Organism Table
 import { calcRowTable } from "../../../Logic/Calcular"; //Logica
 
 export default function LoadsBox() {
-  const [circuits, loadTypes, voltages, phases] = options; //opciones para los Componestes Select
+  const [circuits, loadTypes, phaseVoltages, lineVoltages, phases] = options; //opciones para los Componestes Select
 
   const [circuit, setCircuit] = useState(init); //Estado inicial para los resultado de la tabla
 
   const [form, setForm] = useState(formInit); //Estado para el formulario
 
-  console.log(form);
-  console.log(circuit);
-  console.log(circuits);
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
 
   //onSubmit
   const handleSubmit = (e) => {
@@ -28,14 +31,14 @@ export default function LoadsBox() {
       const newRow = calcRowTable(
         form.circuit,
         form.load,
-        form.loadType,
-        form.fp,
+        form.loadUnits,
+        form.powerFactor,
         form.phases,
         form.voltage,
-        form.DT
+        form.boardDistance
       );
-      let updatedResults = [...circuit.results, newRow];
-      let updatedCircuit = { ...circuit, results: updatedResults };
+      const updatedResults = [...circuit.results, newRow];
+      const updatedCircuit = { ...circuit, results: updatedResults };
       setCircuit(updatedCircuit);
     } catch (error) {
       alert(
@@ -47,73 +50,59 @@ export default function LoadsBox() {
   //Circuito
   const handleCircuitChange = (e) => {
     const newCircuit = e.target.value;
-    let updatedForm = { ...form, circuit: newCircuit };
+    const updatedForm = { ...form, circuit: newCircuit };
     setForm(updatedForm);
   };
 
   //Carga
   const handleLoadChange = (e) => {
-    let newLoad = e.target.value;
-    if (newLoad <= 0) {
-      newLoad = 1;
-    }
-    let updatedForm = { ...form, load: newLoad };
+    const newLoad = parseFloat(e.target.value);
+    const updatedForm = { ...form, load: newLoad };
     setForm(updatedForm);
   };
 
-  //Tipo de carga
-  const handleLoadTypeChange = (e) => {
-    const newLoadType = e.target.value;
-    let updatedForm = { ...form, loadType: newLoadType };
-    //Esta en 'VA' ?, si no, ingresar factor de potencia
-    if (newLoadType !== "VA") {
-      updatedForm = { ...updatedForm, factor: true };
-    } else {
-      updatedForm = { ...updatedForm, factor: false, fp: 1 };
-    }
+  //LOAD UNITS
+  const handleLoadUnitsChange = (e) => {
+    const newLoadUnit = e.target.value;
+    const updatedForm =
+      newLoadUnit === "VA"
+        ? { ...form, loadUnits: newLoadUnit, powerFactor: 1 }
+        : { ...form, loadUnits: newLoadUnit };
     setForm(updatedForm);
   };
 
-  //Factor de potencia
-  const handleFpChange = (e) => {
-    let newFp = e.target.value;
-    if (newFp <= 0 || newFp > 1) {
-      newFp = 1;
-    }
-    let updatedForm = { ...form, fp: newFp };
+  //POWER FACTOR
+  const handlePowerFactorChange = (e) => {
+    const newPowerFactor = parseFloat(e.target.value);
+    const updatedForm = { ...form, powerFactor: newPowerFactor };
     setForm(updatedForm);
   };
 
-  //Voltage
+  //PHASES NUMBER
+  const handlePhasesNumberChange = (e) => {
+    const newPhase = parseFloat(e.target.value);
+    const updatedForm = { ...form, phases: newPhase };
+    setForm(updatedForm);
+  };
+
+  //VOLTAGE
   const handleVoltageChange = (e) => {
-    const newVoltage = parseInt(e.target.value);
-    let updatedForm = { ...form, voltage: newVoltage };
+    const newVoltage = parseFloat(e.target.value);
+    const updatedForm = { ...form, voltage: newVoltage };
     setForm(updatedForm);
   };
 
-  //Phases
-  const handlePhasesChange = (e) => {
-    const newPhase = parseInt(e.target.value);
-    let updatedForm = { ...form, phases: newPhase };
-    setForm(updatedForm);
-  };
-
-  //DT
-  const handleDTChange = (e) => {
-    let newDT = e.target.value;
-    if (newDT < 0) {
-      newDT = 1;
-    }
-    let updatedForm = { ...form, DT: newDT };
+  //BOARD DISTNACE
+  const handleBoardDistanceChange = (e) => {
+    const newBoardDistance = parseFloat(e.target.value);
+    let updatedForm = { ...form, boardDistance: newBoardDistance };
     setForm(updatedForm);
   };
 
   return (
     <div className="loadsBox">
       <>
-        <header className="header">
-          <h2>Loading Box</h2>
-        </header>
+        <Header />
       </>
       <>
         <main className="main">
@@ -124,18 +113,23 @@ export default function LoadsBox() {
               /* Events */
               onChangeCircuit={handleCircuitChange}
               onChangeLoad={handleLoadChange}
-              onChangeLoadType={handleLoadTypeChange}
-              onChangeFp={handleFpChange}
+              onChangeLoadUnits={handleLoadUnitsChange}
+              onChangePowerFactor={handlePowerFactorChange}
+              onChangePhasesNumber={handlePhasesNumberChange}
               onChangeVoltage={handleVoltageChange}
-              onChangePhases={handlePhasesChange}
-              onChangeDT={handleDTChange}
+              onChangeBoardDistance={handleBoardDistanceChange}
               /* Options */
               circuitOptions={circuits}
               loadTypeOptions={loadTypes}
-              voltageOptions={voltages}
               phaseOptions={phases}
-              /* factor */
-              factor={form.factor}
+              phaseVoltageOptions={phaseVoltages}
+              lineVoltageOptions={lineVoltages}
+              /*Customized ciruit ? */
+              customCircuit={form.circuit === "Customized" ? true : false}
+              /* factor ? */
+              powerFactor={form.loadUnits === "VA" ? false : true}
+              /* phase Voltage ? */
+              phaseVoltage={form.phases === 1 ? true : false}
             />
           </>
           <>
@@ -147,35 +141,7 @@ export default function LoadsBox() {
           </>
         </main>
       </>
-      <>
-        <footer className="footer">
-          <p>
-            Conductores Fase y Neutro: T316-16 NTC 2050 - diseño a 60° para
-            conductores canalizados
-          </p>
-          <p>Condutor Tierra : T250-95 NTC 2050 - conductor puesta a tierra</p>
-          <p>conduit PVC tipo A y conduit EMT: T4 NTC 2050 </p>
-          <br />
-          <p>
-            <a
-              href="https://www.minenergia.gov.co/documents/3809/Anexo_General_del_RETIE_vigente_actualizado_a_2015-1.pdf"
-              target="_blanck"
-            >
-              Anexo General del RETIE 2013
-            </a>
-          </p>
-          <p>
-            <a
-              href="https://repositorio.utp.edu.co/bitstream/handle/11059/1994/62131924C149_anexo.pdf?sequence=2"
-              target="_blanck"
-            >
-              Codigo Electrico Colombiano NTC 2050
-            </a>
-          </p>
-          <br />
-          <p>by: Daniel Cardona</p>
-        </footer>
-      </>
+      <Footer />
     </div>
   );
 }

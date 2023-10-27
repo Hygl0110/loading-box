@@ -48,10 +48,25 @@ function textTableLocate(table, valueIn, columIn, columOut) {
 }
 
 //calcular potencia, corriente, calibre y caida de tension adecuadas a la normta CT < 3%
-export function calcRowTable(desc, loadIn, loadType, LF, phases, voltage, DT) {
-  //Carga
+export function calcRowTable(
+  desc,
+  loadIn,
+  loadType,
+  LF,
+  phases,
+  voltageIn,
+  DT
+) {
+  //Power
   const loadTypes = { VA: 1, W: 1, hp: 745.699872, CV: 735.49875 };
   const load = (loadIn * loadTypes[loadType]) / LF;
+
+  //Voltage
+  const voltages = { 120: 208, 123.5: 214, 127: 220 };
+
+  const voltage = [120, 123.5, 127].includes(voltageIn)
+    ? voltages[voltageIn]
+    : voltageIn;
 
   //Corriente
   let current = 0;

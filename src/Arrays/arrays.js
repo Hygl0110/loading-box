@@ -21,11 +21,9 @@ export const init = {
 export const formInit = {
   circuit: "Alumbrado general",
   load: 1,
-  loadType: "VA",
-  fp: 1,
-  factor: false,
-  voltage: 208,
+  loadUnits: "VA",
+  powerFactor: 1,
   phases: 1,
-  DT: 1,
-  maxLoad: 1,
+  voltage: 120,
+  boardDistance: 1,
 };

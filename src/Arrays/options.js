@@ -7,14 +7,19 @@ const options = [
       "Lavado y planchado",
       "Duchas",
       "Bomba",
+      "Customized",
     ],
   },
   {
-    name: "load",
+    name: "loadTypes",
     options: ["VA", "W", "hp", "CV"],
   },
   {
-    name: "voltage",
+    name: "phaseVoltages",
+    options: [120, 123.5, 127],
+  },
+  {
+    name: "lineVoltages",
     options: [208, 214, 220],
   },
   {

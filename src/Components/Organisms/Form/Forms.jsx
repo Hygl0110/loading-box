@@ -16,7 +16,9 @@ export default function Forms(props) {
         <>
           <label>Circuit:</label>
           <Select
-            title="Circuito"
+            id="circuit"
+            name="circuit"
+            title="CIRCUIT"
             onChange={props.onChangeCircuit}
             options={props.circuitOptions}
           />
@@ -25,56 +27,82 @@ export default function Forms(props) {
         <>
           <label>Load:</label>
           <Number
-            title="Carga"
+            id="load"
+            name="load"
+            title="LOAD"
             onChange={props.onChangeLoad}
-            placeholder="Carga"
-            min={1}
+            placeholder="Load"
+            min={0.01}
           />
         </>
 
         <>
           <label>Load units:</label>
           <Select
-            title="Tipo de arga"
-            onChange={props.onChangeLoadType}
+            id="loadUnits"
+            name="loadUnits"
+            title="LOAD UNITS"
+            onChange={props.onChangeLoadUnits}
             options={props.loadTypeOptions}
           />
-          {props.factor ? <label> POWER FACTOR: </label> : null}
-          {props.factor ? (
-            <Number
-              title="Factor de potencia"
-              onChange={props.onChangeFp}
-              placeholder="fp"
-              min={0.01}
-              max={1}
-            />
+        </>
+        <>
+          {props.powerFactor ? (
+            <>
+              <label> Power factor: </label>
+              <Number
+                id="powerFactor"
+                name="powerFactor"
+                title="POWER FACTOR"
+                onChange={props.onChangePowerFactor}
+                placeholder="Power factor"
+                min={0.01}
+                max={1}
+              />
+            </>
           ) : null}
         </>
 
         <>
-          <label>Voltage:</label>
+          <label>Phases number:</label>
           <Select
-            title="Voltaje"
-            onChange={props.onChangeVoltage}
-            options={props.voltageOptions}
-          />
-        </>
-
-        <>
-          <label>Phases:</label>
-          <Select
-            title="Numero de fases"
-            onChange={props.onChangePhases}
+            id="phases"
+            name="phases"
+            title="PHASES NUMBER"
+            onChange={props.onChangePhasesNumber}
             options={props.phaseOptions}
           />
         </>
 
         <>
-          <label>DT:</label>
+          <label>Voltage:</label>
+          {props.phaseVoltage ? (
+            <Select
+              id="voltage"
+              name="voltage"
+              title="PHASE VOLTAGE"
+              onChange={props.onChangeVoltage}
+              options={props.phaseVoltageOptions}
+            />
+          ) : (
+            <Select
+              id="voltage"
+              name="voltage"
+              title="LINE VOLTAGE"
+              onChange={props.onChangeVoltage}
+              options={props.lineVoltageOptions}
+            />
+          )}
+        </>
+
+        <>
+          <label>Board distance:</label>
           <Number
-            title="Distancia al tablero"
-            onChange={props.onChangeDT}
-            placeholder="Ingresar DT"
+            id="DT"
+            name="DT"
+            title="DISTANCE"
+            onChange={props.onChangeBoardDistance}
+            placeholder="Board distance"
             min={0.01}
           />
         </>
