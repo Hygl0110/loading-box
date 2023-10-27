@@ -39,7 +39,7 @@ export default function Forms(props) {
             onChange={props.onChangeLoadType}
             options={props.loadTypeOptions}
           />
-          {props.factor ? <label> lf: </label> : null}
+          {props.factor ? <label> POWER FACTOR: </label> : null}
           {props.factor ? (
             <Number
               title="Factor de potencia"

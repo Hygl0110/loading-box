@@ -17,6 +17,9 @@ export default function LoadsBox() {
   const [form, setForm] = useState(formInit); //Estado para el formulario
 
   console.log(form);
+  console.log(circuit);
+  console.log(circuits);
+
   //onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -159,6 +162,14 @@ export default function LoadsBox() {
               target="_blanck"
             >
               Anexo General del RETIE 2013
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://repositorio.utp.edu.co/bitstream/handle/11059/1994/62131924C149_anexo.pdf?sequence=2"
+              target="_blanck"
+            >
+              Codigo Electrico Colombiano NTC 2050
             </a>
           </p>
           <br />

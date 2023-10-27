@@ -1,17 +1,17 @@
 export const columns = [
   "Descripcion",
-  "Carga(VA)",
-  "Voltaje(V)",
-  "Corriente(A)",
-  "PTM(A)",
+  "Carga (VA)",
+  "Voltaje (V)",
+  "Corriente (A)",
+  "PTM (A)",
   "Polos",
-  "DT(m)",
+  "DT (m)",
   "F",
   "N",
   "T",
-  "CT(%)",
-  "PVCA",
-  "EMT",
+  "CT (%)",
+  `PVC-A (")`,
+  `EMT (")`,
 ];
 export const init = {
   //[desc, load,voltage,current,PTM,poles,DT,F,N,T,CT,PVCA,EMT]
